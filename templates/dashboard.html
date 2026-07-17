@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Admin Dashboard</h2>
+
+<hr>
+
+<div class="row">
+
+<div class="col-md-4">
+
+<div class="card shadow">
+
+<div class="card-body">
+
+<h4>Upload Materials</h4>
+
+<p>Add new files for students.</p>
+
+<a href="/upload" class="btn btn-success">
+Upload
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="card shadow">
+
+<div class="card-body">
+
+<h4>Logout</h4>
+
+<p>Exit admin account.</p>
+
+<a href="/logout" class="btn btn-danger">
+Logout
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

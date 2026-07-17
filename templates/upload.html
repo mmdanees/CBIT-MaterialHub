@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">Upload Material</h2>
+
+<form method="POST" enctype="multipart/form-data">
+
+<div class="mb-3">
+<label>Title</label>
+
+<input
+type="text"
+name="title"
+class="form-control"
+required>
+
+</div>
+
+<div class="mb-3">
+<label>Category</label>
+
+<select
+name="category"
+class="form-select">
+
+<option>Python</option>
+<option>Java</option>
+<option>DBMS</option>
+<option>Machine Learning</option>
+<option>OpenCV</option>
+
+</select>
+
+</div>
+
+<div class="mb-3">
+
+<label>Description</label>
+
+<textarea
+name="description"
+class="form-control"></textarea>
+
+</div>
+
+<div class="mb-3">
+
+<label>Select File</label>
+
+<input
+type="file"
+name="file"
+class="form-control"
+required>
+
+</div>
+
+<button class="btn btn-success">
+Upload Material
+</button>
+
+</form>
+
+{% endblock %}

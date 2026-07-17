@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="text-center mb-4">Study Materials</h2>
+
+<div class="row">
+
+{% for material in materials %}
+
+<div class="col-md-4 mb-4">
+
+    <div class="card shadow">
+
+        <div class="card-body">
+
+            <h5>{{ material.title }}</h5>
+
+            <p>{{ material.description }}</p>
+            <p class="text-muted">
+              Downloads: {{ material.downloads }}
+              </p>
+
+            <span class="badge bg-primary">
+                {{ material.category }}
+            </span>
+
+            <br><br>
+
+            <a href="{{ url_for('download', id=material.id) }}"
+   class="btn btn-success w-100">
+    Download
+</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% else %}
+
+<div class="text-center">
+    <h4>No materials uploaded yet.</h4>
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}
