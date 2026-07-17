@@ -11,12 +11,4 @@ MarkupSafe==3.0.3
 SQLAlchemy==2.0.51
 typing_extensions==4.16.0
 Werkzeug==3.1.8
-services:
-  - type: web
-    name: anees-materialhub
-    runtime: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app
-    envVars:
-      - key: SECRET_KEY
-        generateValue: true
+gunicorn>=23.0,<24.0
