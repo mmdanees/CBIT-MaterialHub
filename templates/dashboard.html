@@ -4,54 +4,46 @@
 
 <h2>Admin Dashboard</h2>
 
-<hr>
-
-<div class="row">
-
-<div class="col-md-4">
-
-<div class="card shadow">
-
-<div class="card-body">
-
-<h4>Upload Materials</h4>
-
-<p>Add new files for students.</p>
-
-<a href="/upload" class="btn btn-success">
-Upload
+<a href="/upload" class="btn btn-success mb-3">
+    Upload Material
 </a>
 
-  <a href="/bulk-upload" class="btn btn-primary">
-    Upload Many Files
+{% for material in materials %}
+
+<div class="card shadow mb-3">
+    <div class="card-body">
+
+        <h5>{{ material.title }}</h5>
+
+        <p><b>Category:</b> {{ material.category }}</p>
+
+        <p>{{ material.description }}</p>
+
+        <a href="/edit/{{ material.id }}" class="btn btn-primary">
+            Edit
+        </a>
+
+        <form action="/delete/{{ material.id }}" method="POST"
+              style="display:inline;"
+              onsubmit="return confirm('Delete this material permanently?');">
+
+            <button class="btn btn-danger">
+                Delete
+            </button>
+
+        </form>
+
+    </div>
+</div>
+
+{% else %}
+
+<p>No uploaded materials yet.</p>
+
+{% endfor %}
+
+<a href="/logout" class="btn btn-outline-danger">
+    Logout
 </a>
-  
-</div>
-
-</div>
-
-</div>
-
-<div class="col-md-4">
-
-<div class="card shadow">
-
-<div class="card-body">
-
-<h4>Logout</h4>
-
-<p>Exit admin account.</p>
-
-<a href="/logout" class="btn btn-danger">
-Logout
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
 
 {% endblock %}
