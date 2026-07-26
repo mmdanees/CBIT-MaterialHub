@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Upload Many Materials</h2>
+
+<form method="POST" enctype="multipart/form-data">
+
+    <div class="mb-3">
+        <label>Category for all files</label>
+        <input type="text" name="category" class="form-control"
+               placeholder="Example: Semester 3 Notes" required>
+    </div>
+
+    <div class="mb-3">
+        <label>Description</label>
+        <textarea name="description" class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label>Select files</label>
+        <input type="file" name="files" class="form-control" multiple required>
+    </div>
+
+    <button class="btn btn-success">
+        Upload Selected Files
+    </button>
+
+</form>
+
+{% endblock %}
