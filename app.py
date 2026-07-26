@@ -49,7 +49,9 @@ def dashboard():
     if not session.get("admin"):
         return redirect(url_for("login"))
 
-    return render_template("dashboard.html")
+    materials = Material.query.order_by(Material.id.desc()).all()
+
+    return render_template("dashboard.html", materials=materials)
 
 # Logout
 @app.route("/logout")
