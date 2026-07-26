@@ -149,6 +149,47 @@ def bulk_upload():
         return redirect(url_for("dashboard"))
 
     return render_template("bulk_upload.html")
+
+@app.route("/edit/<int:id>", methods=["GET", "POST"])
+def edit_material(id):
+
+    if not session.get("admin"):
+        return redirect(url_for("login"))
+
+    material = Material.query.get_or_404(id)
+
+    if request.method == "POST":
+        material.title = request.form["title"].strip()
+        material.category = request.form["category"].strip()
+        material.description = request.form["description"].strip()
+
+        db.session.commit()
+
+        return redirect(url_for("dashboard"))
+
+    return render_template("edit.html", material=material)
+
+
+@app.route("/delete/<int:id>", methods=["POST"])
+def delete_material(id):
+
+    if not session.get("admin"):
+        return redirect(url_for("login"))
+
+    material = Material.query.get_or_404(id)
+
+    file_path = os.path.join(
+        app.config["UPLOAD_FOLDER"],
+        material.filename
+    )
+
+    if os.path.exists(file_path):
+        os.remove(file_path)
+
+    db.session.delete(material)
+    db.session.commit()
+
+    return redirect(url_for("dashboard"))
     
 if __name__ == "__main__":
     app.run(debug=True)
