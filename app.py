@@ -106,6 +106,46 @@ def download(id):
         material.filename,
         as_attachment=True
     )
+@app.route("/bulk-upload", methods=["GET", "POST"])
+def bulk_upload():
 
+    if not session.get("admin"):
+        return redirect(url_for("login"))
+
+    if request.method == "POST":
+
+        category = request.form["category"].strip()
+        description = request.form["description"].strip()
+        files = request.files.getlist("files")
+
+        uploaded_count = 0
+
+        for file in files:
+            if file and file.filename:
+
+                original_name = secure_filename(file.filename)
+                filename = f"{uuid.uuid4().hex}_{original_name}"
+
+                file.save(
+                    os.path.join(app.config["UPLOAD_FOLDER"], filename)
+                )
+
+                title = os.path.splitext(original_name)[0].replace("_", " ")
+
+                material = Material(
+                    title=title,
+                    category=category,
+                    description=description,
+                    filename=filename
+                )
+
+                db.session.add(material)
+                uploaded_count += 1
+
+        db.session.commit()
+
+        return redirect(url_for("dashboard"))
+
+    return render_template("bulk_upload.html")
 if __name__ == "__main__":
     app.run(debug=True)
