@@ -147,5 +147,6 @@ def bulk_upload():
         return redirect(url_for("dashboard"))
 
     return render_template("bulk_upload.html")
+    
 if __name__ == "__main__":
     app.run(debug=True)
